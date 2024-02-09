@@ -95,7 +95,7 @@ public class HttpServer {
                         if (services.containsKey(webURI)) {
                             outputLine = services.get(webURI).handle(query);
                         } else if (webURI.contains(".")) {
-                            outputLine = htttpClientHtml(path, clientSocket.getOutputStream(), userDir);
+                            outputLine = htttpClientHtml(webURI, clientSocket.getOutputStream(), userDir);
                         }
                     } else {
                         //
