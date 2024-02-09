@@ -21,8 +21,9 @@ public class HttpServer {
         return _instance;
     }
 
-    public void runServer() throws IOException, URISyntaxException {
+    public void runServer(String host) throws IOException, URISyntaxException {
         ServerSocket serverSocket = null;
+        String userDir = host == null ? "public" : host;
         try {
             serverSocket = new ServerSocket(Integer.parseInt(env.PORT.getValue()));
         } catch (IOException e) {
@@ -49,12 +50,20 @@ public class HttpServer {
             String outputLine = "";
             boolean search = false;
             boolean firstLine = true;
+            String method = "";
             String uriStr = "";
 
             while ((inputLine = in.readLine()) != null) {
                 if (firstLine) {
-                    uriStr = inputLine.split(" ")[1];
-                    break;
+                    if (inputLine.contains("GET")) {
+                        method = "GET";
+                        uriStr = inputLine.split(" ")[1];
+                        break;
+                    } else if (inputLine.contains("POST")) {
+                        method = "POST";
+                        uriStr = inputLine.split(" ")[1];
+                        break;
+                    }
                 }
                 System.out.println("Received: " + inputLine);
                 if (!in.ready()) {
@@ -85,6 +94,8 @@ public class HttpServer {
                         String webURI = path.replace("/action", "");
                         if (services.containsKey(webURI)) {
                             outputLine = services.get(webURI).handle(query);
+                        } else if (webURI.contains(".")) {
+                            outputLine = htttpClientHtml(path, clientSocket.getOutputStream(), userDir);
                         }
                     } else {
                         //
@@ -111,7 +122,7 @@ public class HttpServer {
                 + "<!DOCTYPE html>\n"
                 + "<html>\n"
                 + "    <head>\n"
-                + "        <title>Error Not found</title>\n"
+                + "        <title>Requested File Not found</title>\n"
                 + "        <meta charset=\"UTF-8\">\n"
                 + "        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
                 + "    </head>\n"
@@ -140,6 +151,34 @@ public class HttpServer {
                 + "\r\n";
 
         Path filePath = Paths.get("target/classes/public/" + path);
+        Charset charset = Charset.forName("UTF-8");
+        if (fileType.contains("image")) {
+            byte[] bytes = Files.readAllBytes(filePath);
+            outputStream.write(outputLine.getBytes());
+            outputStream.write(bytes);
+        } else {
+            BufferedReader reader = Files.newBufferedReader(filePath, charset);
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                outputLine += line;
+                if (!reader.ready()) {
+                    break;
+                }
+            }
+        }
+        return outputLine;
+    }
+
+    public static String htttpClientHtml(String path, OutputStream outputStream, String host) throws IOException {
+        File file = new File(path);
+        String fileType = Files.probeContentType(file.toPath());
+
+        String outputLine = "HTTP/1.1 200 OK\r\n"
+                + "Content-Type:" + fileType + "\r\n"
+                + "\r\n";
+        host += "/";
+
+        Path filePath = Paths.get("target/classes/" + host + path);
         Charset charset = Charset.forName("UTF-8");
         if (fileType.contains("image")) {
             byte[] bytes = Files.readAllBytes(filePath);
@@ -190,5 +229,9 @@ public class HttpServer {
     /* De clase: extensión para manejar algo como Spark */
     public static void get(String r, WebServiceInter s) {
         services.put(r, s);
+    }
+
+    public static void post() {
+        System.out.println("POST not implemented yet.");
     }
 }
