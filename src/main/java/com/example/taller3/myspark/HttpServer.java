@@ -14,7 +14,6 @@ public class HttpServer {
     private static APIQuery movieSearcher = new MovieAPI();
     private static HttpServer _instance = new HttpServer();
 
-
     private HttpServer() {
     }
 
@@ -70,6 +69,12 @@ public class HttpServer {
             URI file = new URI(uriStr);
             System.out.println("Find URI: " + file.getPath());
             String path = file.getPath();
+            String query = file.getQuery();
+            if (query != null) {
+                query = query.split("=")[1];
+            } else {
+                query = "";
+            }
 
             if (search) {
                 getMovieData(out, file);
@@ -79,10 +84,10 @@ public class HttpServer {
                     if (path.startsWith("/action")) {
                         String webURI = path.replace("/action", "");
                         if (services.containsKey(webURI)) {
-                            outputLine = services.get(webURI).handle();
+                            outputLine = services.get(webURI).handle(query);
                         }
                     } else {
-                    //
+                        //
                         outputLine = htttpClientHtml(file.getPath(), clientSocket.getOutputStream());
                     }
                 } catch (IOException e) {

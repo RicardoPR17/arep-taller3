@@ -5,6 +5,6 @@ package com.example.taller3.myspark;
  */
 public interface WebServiceInter {
 
-    public String handle();
-    
+    public String handle(String param);
+
 }

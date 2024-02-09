@@ -6,15 +6,15 @@ import java.net.URISyntaxException;
 //
 public class MyWebServices {
     public static void main(String[] args) throws IOException, URISyntaxException {
-        HttpServer.get("/arep", () -> {
+        HttpServer.get("/arep", (p) -> {
             String resp = "HTTP/1.1 200 OK\r\n"
                     + "Content-Type:text/html\r\n"
                     + "\r\n"
-                    + "<h1>Hello AREP!</h1>";
+                    + "<h1>Hello AREP" + p + "!</h1>";
             return resp;
         });
 
-        HttpServer.get("/arsw", () -> {
+        HttpServer.get("/arsw", (p) -> {
             String resp = "HTTP/1.1 200 OK\r\n"
                     + "Content-Type:text/html\r\n"
                     + "\r\n"
@@ -22,7 +22,7 @@ public class MyWebServices {
             return resp;
         });
 
-        HttpServer.get("/ieti", () -> {
+        HttpServer.get("/ieti", (p) -> {
             String resp = "HTTP/1.1 200 OK\r\n"
                     + "Content-Type:text/html\r\n"
                     + "\r\n"
