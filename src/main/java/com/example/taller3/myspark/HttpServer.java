@@ -129,7 +129,7 @@ public class HttpServer {
     }
 
     private static String httpError() {
-        String outputLine = "HTTP/1.1 404 Not Found\r\n"
+        return "HTTP/1.1 404 Not Found\r\n"
                 + "Content-Type:text/html\r\n"
                 + "\r\n"
                 + "<!DOCTYPE html>\n"
@@ -142,8 +142,6 @@ public class HttpServer {
                 + "    <body>\n"
                 + "        <h1>Error, file not found</h1>\n"
                 + "    </body>\n";
-        return outputLine;
-
     }
 
     /**
@@ -164,7 +162,7 @@ public class HttpServer {
                 + "\r\n";
 
         Path filePath = Paths.get("target/classes/public/" + path);
-        Charset charset = Charset.forName("UTF-8");
+        Charset charset = StandardCharsets.UTF_8;
         if (fileType.contains("image")) {
             byte[] bytes = Files.readAllBytes(filePath);
             outputStream.write(outputLine.getBytes());
@@ -175,6 +173,7 @@ public class HttpServer {
             while ((line = reader.readLine()) != null) {
                 outputLine += line;
                 if (!reader.ready()) {
+                    reader.close();
                     break;
                 }
             }
