@@ -2,6 +2,7 @@ package com.example.taller3.myspark;
 
 import java.net.*;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,6 +15,7 @@ public class HttpServer {
     private static APIQuery movieSearcher = new MovieAPI();
     private static HttpServer _instance = new HttpServer();
     private String userDir;
+    private static String responseType = "text/plain";
 
     private HttpServer() {
     }
@@ -200,7 +202,7 @@ public class HttpServer {
         host += "/";
 
         Path filePath = Paths.get("target/classes/" + host + path);
-        Charset charset = Charset.forName("UTF-8");
+        Charset charset = StandardCharsets.UTF_8;
         if (fileType.contains("image")) {
             byte[] bytes = Files.readAllBytes(filePath);
             outputStream.write(outputLine.getBytes());
@@ -211,6 +213,7 @@ public class HttpServer {
             while ((line = reader.readLine()) != null) {
                 outputLine += line;
                 if (!reader.ready()) {
+                    reader.close();
                     break;
                 }
             }
@@ -240,11 +243,20 @@ public class HttpServer {
         }
 
         String response = "HTTP/1.1 200 OK\r\n"
-                + "Content-Type:application/json; charset=ISO-8859-1\r\n"
+                + "Content-Type:" + responseType + "\r\n"
                 + "\r\n"
                 + movieData;
 
         out.println(response);
+    }
+
+    /**
+     * Set the content type for the API response, by default plain text
+     * 
+     * @param decision true if is a JSON response, false to plain text
+     */
+    public static void setJSONAPIResponse(boolean decision) {
+        responseType = decision ? "application/json" : "text/plain";
     }
 
     /**
