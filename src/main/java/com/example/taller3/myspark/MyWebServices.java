@@ -22,6 +22,7 @@ public class MyWebServices {
             return headers + title + content;
         });
 
+        HttpServer.setJSONAPIResponse(true);
         HttpServer.getInstance().runServer("prueba");
     }
 }
