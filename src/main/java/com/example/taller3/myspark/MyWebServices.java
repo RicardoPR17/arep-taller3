@@ -10,7 +10,7 @@ public class MyWebServices {
             + "\r\n";
 
     public static void main(String[] args) throws IOException, URISyntaxException {
-        HttpServer.get("/arep", p -> headers + "<h1>Hello AREP" + p + "!</h1>");
+        HttpServer.get("/arep", p -> headers + "<h1>Hello AREP " + p + "!</h1>");
 
         HttpServer.get("/arsw", p -> headers + "<h1>Hello to Vietnam Motherfoka!</h1>");
 

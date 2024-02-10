@@ -105,6 +105,8 @@ public class HttpServer {
                             outputLine = services.get(webURI).handle(query);
                         } else if (webURI.contains(".")) {
                             outputLine = htttpClientHtml(webURI, clientSocket.getOutputStream(), userDir);
+                        } else {
+                            outputLine = httpError();
                         }
                     } else {
                         //
@@ -136,7 +138,7 @@ public class HttpServer {
                 + "        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
                 + "    </head>\n"
                 + "    <body>\n"
-                + "        <h1>Error</h1>\n"
+                + "        <h1>Error, file not found</h1>\n"
                 + "    </body>\n";
         return outputLine;
 
