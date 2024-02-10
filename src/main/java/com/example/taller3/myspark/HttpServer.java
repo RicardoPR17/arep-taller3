@@ -13,6 +13,7 @@ public class HttpServer {
     private static HashMap<String, WebServiceInter> services = new HashMap<>();
     private static APIQuery movieSearcher = new MovieAPI();
     private static HttpServer _instance = new HttpServer();
+    private String userDir;
 
     private HttpServer() {
     }
@@ -21,9 +22,17 @@ public class HttpServer {
         return _instance;
     }
 
+    /**
+     * @param dir The name of the directory in resources directory where the user
+     *            files must be search
+     */
+    private void setUserDir(String dir) {
+        this.userDir = dir == null ? "public" : dir;
+    }
+
     public void runServer(String host) throws IOException, URISyntaxException {
         ServerSocket serverSocket = null;
-        String userDir = host == null ? "public" : host;
+        setUserDir(host);
         try {
             serverSocket = new ServerSocket(Integer.parseInt(env.PORT.getValue()));
         } catch (IOException e) {
@@ -169,6 +178,16 @@ public class HttpServer {
         return outputLine;
     }
 
+    /**
+     * 
+     * @param path         Path of the file requested
+     * @param outputStream Instance of OutputStream from a Socket to send an image
+     *                     if is requested
+     * @param host         Name of the host directory where the files are stored
+     * @return String with the response for the request, including headers and
+     *         content
+     * @throws IOException If something related to the file reading goes wrong
+     */
     public static String htttpClientHtml(String path, OutputStream outputStream, String host) throws IOException {
         File file = new File(path);
         String fileType = Files.probeContentType(file.toPath());
@@ -226,7 +245,12 @@ public class HttpServer {
         out.println(response);
     }
 
-    /* De clase: extensión para manejar algo como Spark */
+    /**
+     * Store the path and action to execute by the server
+     * 
+     * @param r Path or route requested by the client
+     * @param s Action to be executed when this route is called
+     */
     public static void get(String r, WebServiceInter s) {
         services.put(r, s);
     }
