@@ -29,7 +29,7 @@ Para ejecutarlo, podrá hacerlo desde la terminal de comandos como se explica a 
   En caso de realizar la ejecución desde la terminal de comandos, se debe realizar lo siguiente:
   1. Acceder al directorio del proyecto usando el comando `cd arep-taller3`.
   2. Una vez dentro del directorio del proyecto, se ejecuta el comando `mvn package` para generar la carpeta _target_.
-  3. Desde la terminal, ejecutamos el comando `java -cp .\target\classes com.example.Taller3.myspark.MyWebServices`.
+  3. Desde la terminal, ejecutamos el comando `java -cp .\target\classes com.example.taller3.myspark.MyWebServices`.
   4. Listo, el servidor web estará corriendo y verás un mensaje diciendo que está listo para recibir peticiones.
 
 
@@ -86,25 +86,83 @@ Gracias a esta distribución de archivos en carpetas, es posible diferenciar los
 
 Para estas pruebas, vamos a acceder a cada uno de los recursos añadidos por el usuario principalmente. Para eso, se usará el navegador de Firefox y el apartado de red de su inspección de recursos.
 
-+
++ Imagen camara fotográfica: http://localhost:17000/action/camera.png
+
+![Imágen cámara usuario](<Imágenes README/image-camera.png>)
+
++ Página web API nueva: http://localhost:17000/action/films.html
+
+![API usuario](<Imágenes README/image-1.png>)
+
+Esta, es la versión del usuario de la API de pelícilas, por ello se cuenta con un diseño diferente pero el nombre de los archivos semejante. Y si hacemos una petición, se resolverá correctamente y vemos esto en el último registro de las peticiones realizadas con respuesta JSON.
+
+![Petición](<Imágenes README/image-2.png>)
+
++ Código JavaScript API películas: http://localhost:17000/action/movieRequest.js
+
+![JS usuario](<Imágenes README/image-3.png>)
+
++ Hoja de estilos página web API películas: http://localhost:17000/action/movie.css
+
+![CSS usuario](<Imágenes README/image-4.png>)
+
++ Imagen pruebas unitarias: http://localhost:17000/action/testing.png
+
+![Testing](<Imágenes README/image-5.png>)
+
++ Página simple AREP, puede enviar parámetros: http://localhost:17000/action/arep?param=a | http://localhost:17000/action/arep
+
+  + Sin parámetros
+
+  ![AREP sin parámetros](<Imágenes README/image-6.png>)
+
+  + Con parámetros
+
+  ![AREP con parámetros](<Imágenes README/image-7.png>)
+
++ Página simple ARSW: http://localhost:17000/action/arsw
+
+![ARSW X.X](<Imágenes README/image-8.png>)
+
++ Página simple IETI: http://localhost:17000/action/ieti
+
+![IETI :D](<Imágenes README/image-9.png>)
+
++ Página simple Queries, puede enviar parámetros: http://localhost:17000/action/queries?test=taller3
+
+![Queries](<Imágenes README/image-10.png>)
 
 También, verificamos que los recursos nativos sigan funcionando de forma adecuada.
 
 + Página web API películas: http://localhost:17000/movie.html
 
-![API]()
+![API](<Imágenes README/image-11.png>)
 
 Aquí, vemos que trae los recursos necesarios para cargar la página. Y también, la petición satisfactoria de la información de una película.
 
 + GIF cubo de rubik: http://localhost:17000/scramble.gif
 
-![Boom]()
+![BOOM](<Imágenes README/image-12.png>)
 
 ### _Linux_
 
 Para mostrar el funcionamiento del servidor y accesibilidad desde otros sistemas operativos, por medio de una máquina virtual vamos a acceder a algunos de los servicios creados por el usuario y algunos nativos del servidor.
 
-+
++ Imagen camara fotográfica: http://localhost:17000/action/camera.png
+
+
+
++ Página web API nueva: http://localhost:17000/action/films.html+
+
+
+
++ Imágen cubo de rubik: http://localhost:17000/cube.jpg
+
+
+
++ Página de formularios: http://localhost:17000/public.html
+
+
 
 ## **Construido con**
   - [Git](https://git-scm.com) - Control de versiones
