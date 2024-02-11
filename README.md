@@ -146,21 +146,21 @@ Aquí, vemos que trae los recursos necesarios para cargar la página. Y también
 
 ### _Linux_
 
-Para mostrar el funcionamiento del servidor y accesibilidad desde otros sistemas operativos, por medio de una máquina virtual vamos a acceder a algunos de los servicios creados por el usuario y algunos nativos del servidor.
+Para mostrar el funcionamiento del servidor y accesibilidad desde otros sistemas operativos, por medio de una máquina virtual vamos a acceder a algunos de los servicios creados por el usuario y algunos nativos del servidor. Para esto, se revisó la IP de la máquina donde corría el servidor y con ella acceder al servicio.
 
-+ Imagen cámara fotográfica: http://localhost:17000/action/camera.png
++ Imagen cámara fotográfica: http://`<IP servidor>`:17000/action/camera.png
 
 ![Linux cámara usuario](<Imágenes README/linux cam.png>)
 
-+ Página web API nueva: http://localhost:17000/action/films.html
++ Página web API nueva: http://`<IP servidor>`:17000/action/films.html
 
 ![Linux API películas](<Imágenes README/linux api.png>)
 
-+ Imagen cubo de rubik: http://localhost:17000/cube.jpg
++ Imagen cubo de rubik: http://`<IP servidor>`:17000/cube.jpg
 
 ![Linux cubo](<Imágenes README/linux cube.png>)
 
-+ Página de formularios: http://localhost:17000/public.html
++ Página de formularios: http://`<IP servidor>`:17000/public.html
 
 ![Linux formularios](<Imágenes README/linux form.png>)
 
