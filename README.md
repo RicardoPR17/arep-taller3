@@ -2,7 +2,7 @@
 ### *Hecho por Ricardo Pulido Renteria*
 
 En este taller, se extiende servidor web creado en el taller anterior utilizando Java y archivos almacenados en el disco.
-Ahora, se convierte en un servidor de aplicaciones con el cual las personas podrían crear un servicio sencillo, tomando de guía el framework de Spark.
+Ahora, se convierte en un servidor de aplicaciones con el cual las personas podrían crear un servicio sencillo, tomando de guía el framework de Spark, brindando al usuario la posibilidad de tratar peticiones GET y POST.
 
 ## **Descarga y ejecución**
 
@@ -148,21 +148,23 @@ Aquí, vemos que trae los recursos necesarios para cargar la página. Y también
 
 Para mostrar el funcionamiento del servidor y accesibilidad desde otros sistemas operativos, por medio de una máquina virtual vamos a acceder a algunos de los servicios creados por el usuario y algunos nativos del servidor.
 
-+ Imagen camara fotográfica: http://localhost:17000/action/camera.png
++ Imagen cámara fotográfica: http://localhost:17000/action/camera.png
 
+![Linux cámara usuario](<Imágenes README/linux cam.png>)
 
++ Página web API nueva: http://localhost:17000/action/films.html
 
-+ Página web API nueva: http://localhost:17000/action/films.html+
+![Linux API películas](<Imágenes README/linux api.png>)
 
++ Imagen cubo de rubik: http://localhost:17000/cube.jpg
 
-
-+ Imágen cubo de rubik: http://localhost:17000/cube.jpg
-
-
+![Linux cubo](<Imágenes README/linux cube.png>)
 
 + Página de formularios: http://localhost:17000/public.html
 
+![Linux formularios](<Imágenes README/linux form.png>)
 
+Como vemos, la respuesta del servidor fue aceptada y presentada de forma correcta en la máquina virtual con sistema operativo Linux, en este caso Kali Linux. Con esto, vemos que nuestro servidor de aplicaciones funciona de la forma esperada y es interpretada por 2 de los sistemas operativos más utilizados.
 
 ## **Construido con**
   - [Git](https://git-scm.com) - Control de versiones
