@@ -132,6 +132,18 @@ Esta, es la versión del usuario de la API de pelícilas, por ello se cuenta con
 
 ![Queries](<Imágenes README/image-10.png>)
 
++ Prueba del método post, puede enviar parámetros: http://localhost:17000/action/post_test | http://localhost:17000/action/post_test?name=Paco
+
+  + Sin parámetros
+
+  ![Post sin parámetros](<Imágenes README/post1.png>)
+
+  + Con parámetros
+
+  ![Post con parámetros](<Imágenes README/post2.png>)
+
+
+
 También, verificamos que los recursos nativos sigan funcionando de forma adecuada.
 
 + Página web API películas: http://localhost:17000/movie.html

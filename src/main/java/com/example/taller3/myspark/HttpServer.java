@@ -100,18 +100,26 @@ public class HttpServer {
                 getMovieData(out, file);
             } else {
                 try {
-                    //
                     if (path.startsWith("/action")) {
                         String webURI = path.replace("/action", "");
-                        if (services.containsKey(webURI)) {
-                            outputLine = services.get(webURI).handle(query);
-                        } else if (webURI.contains(".")) {
-                            outputLine = htttpClientHtml(webURI, clientSocket.getOutputStream(), userDir);
-                        } else {
-                            outputLine = httpError();
+                        if (method.equals("GET")) {
+                            if (services.containsKey(webURI)) {
+                                outputLine = services.get(webURI).handle(query);
+                            } else if (webURI.contains(".")) {
+                                outputLine = htttpClientHtml(webURI, clientSocket.getOutputStream(), userDir);
+                            } else {
+                                outputLine = httpError();
+                            }
+                        } else if (method.equals("POST")) {
+                            if (services.containsKey(webURI)) {
+                                outputLine = services.get(webURI).handle(query);
+                            } else if (webURI.contains(".")) {
+                                outputLine = htttpClientHtml(webURI, clientSocket.getOutputStream(), userDir);
+                            } else {
+                                outputLine = httpError();
+                            }
                         }
                     } else {
-                        //
                         outputLine = htttpClientHtml(file.getPath(), clientSocket.getOutputStream());
                     }
                 } catch (IOException e) {
@@ -269,9 +277,14 @@ public class HttpServer {
     }
 
     /**
+     * Store the path and action to execute by the server
      * Implementation in progress...
+     * 
+     * @param r Path or route requested by the client
+     * @param s Action to be executed when this route is called
      */
-    public static void post() {
-        System.out.println("POST not implemented yet.");
+    public static void post(String r, WebServiceInter s) {
+        // System.out.println("POST not implemented yet.");
+        services.put(r, s);
     }
 }
